@@ -1,0 +1,37 @@
+{
+  "summary": {
+    "total_invoices": 2,
+    "valid_invoices": 1,
+    "invalid_invoices": 1,
+    "error_counts": {
+      "required_fields: Required field 'buyer_name' is missing or empty": 1,
+      "totals_match: Totals mismatch: 1000": 1
+    },
+    "warning_counts": {}
+  },
+  "results": [
+    {
+      "invoice_id": "INV-2024-001",
+      "is_valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "invoice_id": "INV-2024-002",
+      "is_valid": false,
+      "errors": [
+        {
+          "rule": "required_fields",
+          "message": "Required field 'buyer_name' is missing or empty",
+          "field": "buyer_name"
+        },
+        {
+          "rule": "totals_match",
+          "message": "Totals mismatch: 1000.0 + 100.0 = 1100.0, but gross_total is 1200.0 (diff: 100.00)",
+          "field": "gross_total"
+        }
+      ],
+      "warnings": []
+    }
+  ]
+}
