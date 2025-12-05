@@ -460,13 +460,6 @@ For processing large batches:
 - Each worker calls QC service
 - Results stored in database for retrieval
 
-#### **Monitoring & Observability**
-
-- **Logs**: Structured logging (JSON format) to ELK stack or CloudWatch
-- **Metrics**: Prometheus metrics for API latency, validation success rate
-- **Tracing**: OpenTelemetry for distributed tracing
-- **Alerts**: PagerDuty/Slack alerts for high error rates
-
 ### API Authentication (Future Enhancement)
 
 For production:
@@ -475,8 +468,6 @@ For production:
 - Role-based access control (admin vs read-only)
 
 ---
-
-## AI Usage Notes
 
 ### Tools Used
 
@@ -491,69 +482,6 @@ For production:
    - React component structure
    - CSS styling suggestions
 
-### Use Cases
-
-#### **Where AI Helped**
-
-1. **Regex Patterns**: Generated initial patterns for invoice number, dates, amounts
-   - Prompt: "Generate regex patterns for extracting invoice numbers from text"
-   - Result: Good starting point, but needed refinement for edge cases
-
-2. **API Design**: Suggested RESTful endpoint structure
-   - Prompt: "Design FastAPI endpoints for invoice validation service"
-   - Result: Clean structure with appropriate HTTP methods
-
-3. **Frontend Components**: Generated shadcn/ui component usage
-   - Prompt: "Create React component for displaying validation errors"
-   - Result: Good foundation, but needed UX improvements
-
-#### **Where AI Failed / Was Suboptimal**
-
-1. **PDF Table Parsing Logic**
-   - **AI Suggestion**: Use simple column index matching
-   - **Problem**: Fails when tables have variable column counts
-   - **My Solution**: Header-based column matching with fuzzy name matching
-
-2. **Validation Rule Design**
-   - **AI Suggestion**: Single monolithic validation function
-   - **Problem**: Not extensible, hard to test individual rules
-   - **My Solution**: Rule pattern with base class, each rule is independent and testable
-
-3. **Error Message Formatting**
-   - **AI Suggestion**: Generic "validation failed" messages
-   - **Problem**: Not actionable for users
-   - **My Solution**: Detailed messages with field names, actual vs expected values, and context
-
-4. **CLI Output Formatting**
-   - **AI Suggestion**: Plain text output
-   - **Problem**: Hard to scan for important information
-   - **My Solution**: Color-coded output with typer, clear sections, top error summary
-
-### AI Chat Examples
-
-*Note: Detailed chat logs would be included in `/ai-notes/` folder in a real submission*
-
-**Example interaction**:
-```
-Me: How can I extract tables from PDFs in Python?
-
-AI: You can use pdfplumber library. Here's a basic example:
-[code snippet]
-
-Me: How do I identify which table contains line items vs other tables?
-
-AI: [Initial suggestion was to use table position/size]
-
-Me: That won't work for variable formats. Better approach?
-
-AI: Check header row for keywords like "Description", "Quantity", "Price"
-[Improved solution]
-```
-
----
-
-## Assumptions & Limitations
-
 ### Assumptions
 
 1. **PDF Format**: Invoices are text-based PDFs (not scanned images requiring OCR)
@@ -561,15 +489,6 @@ AI: Check header row for keywords like "Description", "Quantity", "Price"
 3. **Structure**: Invoices follow common B2B format (seller/buyer sections, line items table)
 4. **Currency**: Single currency per invoice
 5. **Date Format**: Dates are in common formats (ISO, DD/MM/YYYY, MM/DD/YYYY)
-
-### Limitations
-
-1. **OCR**: No support for scanned/image PDFs (would need Tesseract or cloud OCR)
-2. **Multi-page Tables**: Line items spanning multiple pages may be incomplete
-3. **Complex Layouts**: Highly custom invoice designs may fail extraction
-4. **Language**: Only English pattern matching (would need i18n for other languages)
-5. **Performance**: Synchronous processing (large batches would benefit from async/queue)
-6. **Duplicate Detection**: Only checks within current batch, not against historical DB
 
 ### Edge Cases Not Fully Handled
 
@@ -601,38 +520,6 @@ To test the service with sample invoices:
      --pdf-dir /app/sample_invoices \
      --report /app/output/report.json
    ```
-3. **Check output**: Validation report saved to `/app/output/report.json`
-
-### Sample Test Invoice JSON
-
-Create `/app/output/test_invoice.json`:
-```json
-[
-  {
-    "invoice_number": "INV-2024-001",
-    "invoice_date": "2024-01-15",
-    "due_date": "2024-02-15",
-    "seller_name": "Tech Solutions GmbH",
-    "seller_address": "123 Business St, Berlin, Germany",
-    "seller_tax_id": "DE123456789",
-    "buyer_name": "Global Corp Ltd",
-    "buyer_address": "456 Commerce Ave, London, UK",
-    "buyer_tax_id": "GB987654321",
-    "currency": "EUR",
-    "net_total": 5000.00,
-    "tax_amount": 950.00,
-    "gross_total": 5950.00,
-    "payment_terms": "Net 30",
-    "line_items": [
-      {
-        "description": "Software License - Annual",
-        "quantity": 10,
-        "unit_price": 500.00,
-        "line_total": 5000.00
-      }
-    ]
-  }
-]
 ```
 
 Validate with:
@@ -642,22 +529,6 @@ python -m invoice_qc.cli validate \
   --report /app/output/test_report.json
 ```
 
----
-
-## Video Demonstration
-
-**Video Link**: [To be added - Upload to Google Drive with public access]
-
-The video demonstration covers:
-1. Architecture overview and code walkthrough (5 min)
-2. CLI demo - extract, validate, full-run (3 min)
-3. API demo - Postman/curl requests (3 min)
-4. Frontend demo - upload PDFs, view results, filter (4 min)
-5. Integration discussion (2 min)
-6. Setup instructions (3 min)
-
----
-
 ## GitHub Repository
 
 **Repository**: [To be added - Private repo shared with deeplogicaitech and csvinay]
@@ -666,9 +537,9 @@ The video demonstration covers:
 
 ## Contact
 
-**Author**: [Your Name]
-**Email**: [your.email@example.com]
-**Date**: January 2025
+**Author**: Kruthika D
+**Email**: kruthika.deepaks@gmail.com
+**Date**: December 2025
 
 ---
 
