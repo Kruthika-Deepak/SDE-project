@@ -531,7 +531,8 @@ python -m invoice_qc.cli validate \
 
 ## GitHub Repository
 
-**Repository**: [To be added - Private repo shared with deeplogicaitech and csvinay]
+**Repository**: 
+Repo shared with deeplogicaitech and csvinay
 
 ---
 
