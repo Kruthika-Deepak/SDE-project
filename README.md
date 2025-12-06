@@ -533,7 +533,6 @@ python -m invoice_qc.cli validate \
 
 **Repository**: 
 Repo shared with deeplogicaitech and csvinay
-
 ---
 
 ## Contact
